@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# Playwright outputs
+test-results/
+playwright-report/
+blob-report/
+**/*.zip
+
+# env & local
+.env
+.DS_Store
+
+# TS build cache
+dist/
+*.tsbuildinfo
