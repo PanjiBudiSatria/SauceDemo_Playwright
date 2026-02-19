@@ -7,7 +7,7 @@ import {CheckoutPage} from './pages/CheckoutPage';
 const USER_OK = {user:'standard_user', pass:'secret_sauce'};
 const ITEM = 'Sauce Labs Backpack';
 
-test.describe('Saucedemo Scenarios', () => {
+test.describe('Smoke', () => {
     test('1) Berhasil Login', async ({ page }) => {
     const login = new LoginPage(page);
     const inventory = new InventoryPage(page);
@@ -17,6 +17,7 @@ test.describe('Saucedemo Scenarios', () => {
     await inventory.expectOnInventory();
     });
 
+test.describe('Smoke', () => {
     test('2) Berhasil menambahkan barang ke cart', async ({ page }) => {
     const login = new LoginPage(page);
     const inventory = new InventoryPage(page);
@@ -32,15 +33,18 @@ test.describe('Saucedemo Scenarios', () => {
     await inventory.openCart();
     await cart.expectItemInCart(ITEM);
     });
+});
 
+test.describe('Smoke', () => {
     test('3) Gagal Login', async ({ page }) => {
     const login = new LoginPage(page);
     await login.goto();
     await login.login('standard_user', 'salah_password');
     await login.expectLoginErrorContains('Username and password do not match');
     });
+});
 
-
+test.describe('Smoke', () => {
     test('4) Gagal checkout karena data tidak lengkap', async ({ page }) => {
     const login = new LoginPage(page);
     const inventory = new InventoryPage(page);
@@ -60,7 +64,9 @@ test.describe('Saucedemo Scenarios', () => {
 
     await checkout.expectCheckoutErrorContains('Error: First Name is required');
     });
+});
 
+test.describe('Regression', () => {
 test('5) Berhasil login sampai checkout barang', async ({ page }) => {
     const login = new LoginPage(page);
     const inventory = new InventoryPage(page);
@@ -83,5 +89,5 @@ test('5) Berhasil login sampai checkout barang', async ({ page }) => {
     await checkout.finish();
     await checkout.expectComplete();
     });
-
+    });
 });
